@@ -1,6 +1,7 @@
 import { useState } from "react";
-import type { Task, FilterOptions } from "../../types"
+import type { Task, FilterOptions, TaskStatus, TaskFormData } from "../../types"
 import { TaskList } from "../TaskList/TaskList";
+import { TaskForm } from "../TaskForm/TaskForm";
 
 
 export function Dashboard() {
@@ -22,12 +23,41 @@ export function Dashboard() {
             dueDate: "2026-10-15"
         }
     ])
+
     const [filters, setFilters] = useState<FilterOptions>({})
+
+    function handleStatusChange(taskId : string, newStatus : TaskStatus) {
+          setTasks((prevTasks) => 
+            prevTasks.map((task) => 
+            task.id === taskId
+            ? {...task, status:newStatus}
+            :task
+        )
+        )
+    }
+
+    function handleDeleteTask (taskId: string) {
+       setTasks((prevTasks) =>
+          prevTasks.filter((task) => task.id !==taskId )
+       );
+    }
+
+    function handleAddTask(newTask : Task) {
+        setTasks((prevTasks) => [ ...prevTasks, newTask])
+        
+    }
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <div className="mx-auto max-w-4xl">
             <h1 className="mb-6 text-3xl font-bold text-gray-900">Task Management Dashboard</h1>
-            <TaskList tasks ={tasks}/>
+            <TaskForm
+              onAddTask = {handleAddTask}
+            />
+            <TaskList 
+               tasks ={tasks} 
+               onStatusChange={handleStatusChange}
+               onDeleteTask ={handleDeleteTask}
+            />
             </div>
         </div>
     )
