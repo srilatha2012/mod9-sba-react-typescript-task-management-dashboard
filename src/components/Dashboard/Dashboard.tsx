@@ -21,14 +21,14 @@ export function Dashboard() {
             priority: "medium",
             dueDate: "2026-10-15"
         }
-
-
     ])
     const [filters, setFilters] = useState<FilterOptions>({})
     return (
-        <div>
-            <h1>Task Management Dashboard</h1>
+        <div className="min-h-screen bg-gray-100 p-6">
+            <div className="mx-auto max-w-4xl">
+            <h1 className="mb-6 text-3xl font-bold text-gray-900">Task Management Dashboard</h1>
             <TaskList tasks ={tasks}/>
+            </div>
         </div>
     )
 }
