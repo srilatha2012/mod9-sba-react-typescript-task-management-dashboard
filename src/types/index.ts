@@ -20,3 +20,11 @@ export interface FilterOptions {
      priority?: "low" | "medium" | "high",
      search?: string
 }
+
+export interface TaskListProps {
+    tasks : Task[]
+}
+
+export interface TaskItemProps {
+    task : Task
+}
