@@ -1,4 +1,4 @@
-import type { TaskFilterProps, TaskStatus, TaskPriority } from "../../types";
+import type { TaskFilterProps, TaskStatus, TaskPriority, SortOption } from "../../types";
 
 export function TaskFilter({ filters, setFilters }: TaskFilterProps) {
 
@@ -18,7 +18,10 @@ export function TaskFilter({ filters, setFilters }: TaskFilterProps) {
                 onChange={(e) =>
                     setFilters({
                         ...filters,
-                        status: e.target.value as TaskStatus
+                        status:
+                            e.target.value === ""
+                                ? undefined
+                                : (e.target.value as TaskStatus),
                     })
                 }
                 className="rounded border p-2"
@@ -47,9 +50,21 @@ export function TaskFilter({ filters, setFilters }: TaskFilterProps) {
                 <option value="high">High</option>
             </select>
 
+            <select
+                value={filters.sortBy || ""}
+                onChange={(e) =>
+                    setFilters({
+                        ...filters,
+                        sortBy: e.target.value === "" ? undefined : (e.target.value as SortOption)
+
+                    })}
+                className="rounded border p-2"
+            >
+                <option value="">No Sort</option>
+                <option value="title">Sort By Title</option>
+                <option value="priority">Sort By Priority</option>
+                <option value="dueDate">Sort By Due Date</option>
+            </select>
         </div>
     )
-
-
-
 }

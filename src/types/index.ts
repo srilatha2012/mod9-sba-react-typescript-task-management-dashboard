@@ -1,5 +1,6 @@
 export type TaskStatus = "pending" | "in-progress" | "completed";
 export type TaskPriority = "low" | "medium" | "high";
+export type SortOption = "title" | "priority" | "dueDate";
 export interface Task {
     id: string,
     title: string,
@@ -24,7 +25,8 @@ export interface TaskFormDataProp {
 export interface FilterOptions {
      status?: TaskStatus,
      priority?: TaskPriority,
-     search?: string
+     search?: string,
+     sortBy?: SortOption
 }
 
 export interface TaskFilterProps {
