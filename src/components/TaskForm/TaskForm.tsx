@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Task, TaskFormData, TaskFormDataProp } from "../../types";
+import { validateTaskForm } from "../../utils/taskUtils";
 
 export function TaskForm({ onAddTask }: TaskFormDataProp) {
 
@@ -12,6 +13,12 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
     });
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
+        const errors = validateTaskForm(formData);
+        if (errors.length > 0) {
+            console.log(errors);
+            return;
+        }
+
 
         const newTask: Task = {
             id: crypto.randomUUID(),

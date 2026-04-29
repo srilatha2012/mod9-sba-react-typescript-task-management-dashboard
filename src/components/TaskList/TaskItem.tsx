@@ -1,4 +1,5 @@
 import type { TaskItemProps, TaskStatus } from "../../types";
+import { formatDate } from "../../utils/taskUtils";
 
 export function TaskItem({ task, onStatusChange, onDeleteTask }: TaskItemProps) {
 
@@ -9,7 +10,10 @@ export function TaskItem({ task, onStatusChange, onDeleteTask }: TaskItemProps) 
             <div className="mt-4 space-y-1 text-sm">
                 <p><span className="font-semibold"> {task.status}</span></p>
                 <p><span className="font-semibold">{task.priority}</span></p>
-                <p><span className="font-semibold">{task.dueDate}</span></p>
+                <p>
+                    <span className="font-semibold">Due Date: </span>
+                    {formatDate(task.dueDate)}
+                </p>
                 <select
                     value={task.status}
                     onChange={(e) =>
@@ -26,7 +30,7 @@ export function TaskItem({ task, onStatusChange, onDeleteTask }: TaskItemProps) 
                     }
                     className="mt-3 rounded bg-red-500 px-3 py-1 text-white"
                 >
-                Delete
+                    Delete
                 </button>
             </div>
         </div>
