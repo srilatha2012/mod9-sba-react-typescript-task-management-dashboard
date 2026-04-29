@@ -1,11 +1,11 @@
 export type TaskStatus = "pending" | "in-progress" | "completed";
-export type priority = "low" | "medium" | "high";
+export type TaskPriority = "low" | "medium" | "high";
 export interface Task {
     id: string,
     title: string,
     description : string,
     status: TaskStatus,
-    priority: "low" | "medium" | "high",
+    priority: TaskPriority,
     dueDate: string
     
 }
@@ -14,7 +14,7 @@ export interface TaskFormData {
     title: string,
     description : string,
     status: TaskStatus,
-    priority: priority,
+    priority: TaskPriority,
     dueDate: string
 }
 
@@ -22,9 +22,14 @@ export interface TaskFormDataProp {
     onAddTask : (task : Task) => void
 }
 export interface FilterOptions {
-     status?: "pending" | "in-progress" | "completed",
-     priority?: "low" | "medium" | "high",
+     status?: TaskStatus,
+     priority?: TaskPriority,
      search?: string
+}
+
+export interface TaskFilterProps {
+    filters: FilterOptions;
+    setFilters: React.Dispatch<React.SetStateAction<FilterOptions>>;
 }
 
 export interface TaskListProps {
@@ -38,3 +43,4 @@ export interface TaskItemProps {
     onStatusChange : (taskId : string, newStatus :TaskStatus) => void;
     onDeleteTask : (taskId: string) => void;
 }
+

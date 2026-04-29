@@ -1,7 +1,8 @@
 import { useState } from "react";
-import type { Task, FilterOptions, TaskStatus, TaskFormData } from "../../types"
+import type { Task, FilterOptions, TaskStatus } from "../../types"
 import { TaskList } from "../TaskList/TaskList";
 import { TaskForm } from "../TaskForm/TaskForm";
+import { TaskFilter } from "../TaskFilter/TaskFilter";
 
 
 export function Dashboard() {
@@ -46,6 +47,10 @@ export function Dashboard() {
         setTasks((prevTasks) => [ ...prevTasks, newTask])
         
     }
+
+    const filteredTasks = tasks.filter((task) =>
+        filters.status ? task.status === filters.status :true
+        )
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <div className="mx-auto max-w-4xl">
@@ -53,11 +58,16 @@ export function Dashboard() {
             <TaskForm
               onAddTask = {handleAddTask}
             />
+             <TaskFilter
+              filters={filters}
+              setFilters={setFilters}
+            />
             <TaskList 
-               tasks ={tasks} 
+               tasks ={filteredTasks} 
                onStatusChange={handleStatusChange}
                onDeleteTask ={handleDeleteTask}
             />
+           
             </div>
         </div>
     )
