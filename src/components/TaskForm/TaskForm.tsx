@@ -36,8 +36,12 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
         )
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form 
+          onSubmit={handleSubmit}
+          className="max-w-md mx-auto mt-8 p-6 bg-white rounded-xl shadow-md space-y-4">
+            <h2 className="text-2xl font-bold text-gray-800">Add New Task</h2>
             <input
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 placeholder="title"
                 value={formData.title}
@@ -47,6 +51,7 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
             />
             <br />
             <input
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 placeholder="description"
                 value={formData.description}
@@ -56,6 +61,7 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
             />
             <br />
             <select
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.status}
                 onChange={(e) =>
                     setFormData({ ...formData, status: e.target.value as Task["status"] })
@@ -67,6 +73,7 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
             </select>
             <br />
             <select
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.priority}
                 onChange={(e) =>
                     setFormData({ ...formData, priority: e.target.value as Task["priority"] })
@@ -78,7 +85,8 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
             </select>
             <br />
             <input
-                type="text"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="date"
                 placeholder="dueDate"
                 value={formData.dueDate}
                 onChange={(e) =>
@@ -86,7 +94,11 @@ export function TaskForm({ onAddTask }: TaskFormDataProp) {
                 }
             />
             <br />
-            <button type="submit">Add Task</button>
+            <button 
+              className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
+              type="submit">
+                Add Task
+            </button>
         </form>
     )
 }
